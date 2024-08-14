@@ -1,0 +1,200 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 600px;
+  height: 440px;
+  /* margin-top: 200px; */
+  background: rgb(256,256,256,0.8);
+  padding-bottom: 30px;
+  padding: 20px 20px 10px 20px;
+  border-radius: 25px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+}
+
+.text{
+  color: #3c009d;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.underline {
+  width : 61px ;
+  height: 3px;
+  background: #3c009d;
+  border-radius: 7px;
+}
+
+.inputs{
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  width: 480px;
+  height: 50px;
+  background: rgba(234,234,234 , 0.6);
+  border-radius: 6px;
+}
+
+.input img {
+  margin: 0px 30px;
+  width: 20px;
+}
+
+.input input {
+  height : 30px;
+  width : 350px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #797979;
+  font-size: 16px;
+  padding-inline: 8px;
+}
+
+p {
+  padding-inline: 3px;
+}
+.submit-container{
+  margin: 30px auto;
+}
+
+.register-btn {
+  background-color: #13aa52;
+  border: 1px solid #13aa52;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  outline: 0;
+  padding: 10px 25px;
+  text-align: center;
+  transform: translateY(0);
+  transition: transform 150ms, box-shadow 150ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.register-btn:hover {
+  box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+  transform: translateY(-2px);
+}
+
+.register-btn:disabled {
+  background-color: #678561;
+  border: 1px solid #c0c0c0;
+  color: #ffffff;
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+  transform: none;
+}
+
+.password-disclaimer {
+  color: #555;
+  font-size: 12px;
+  width: 460px;
+  line-height: 1.5;
+  text-align: center;
+  margin: 10px auto;
+}
+
+
+@media (min-width: 768px) {
+  .register-btn {
+    padding: 10px 30px;
+  }
+}
+
+@media (max-width: 704px) {
+  .container{
+    width: 450px;
+  }
+  .input{
+    width: 390px;
+  }
+  .input input{
+    width: 260px;
+  }
+  .password-disclaimer{
+    width: 370px;
+  }
+}
+
+@media (max-width: 557px) {
+  .container{
+    width: 360px;
+  }
+  .input{
+    width: 300px;
+  }
+  .input input{
+    width: 200px;
+  }
+  .input img{
+    margin: 0 15px;
+  }
+  .password-disclaimer{
+    width: 280px;
+    text-align: justify;
+  }
+}
+
+@media (max-width: 468px) {
+  .container{
+    width: 310px;
+  }
+  .input{
+    width: 270px;
+    margin: 0 15px;
+  }
+  .input input{
+    width: 190px;
+  }
+  .input img {
+    width: 15px;
+    margin: 0 10px;
+  }
+  .password-disclaimer{
+    width: 250px;
+  }
+}
+
+@media (max-width: 409px) {
+  .container{
+    width: 260px;
+  }
+  .input{
+    width: 220px;
+  }
+  .input input{
+    width: 140px;
+    font-size: 12px;
+  }
+  .input img {
+    width: 15px;
+  }
+  .password-disclaimer{
+    width: 200px;
+  }
+}
+
