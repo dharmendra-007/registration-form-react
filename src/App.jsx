@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import Registration from './components/Registration/Registration'
-import Success from './components/success/success'
+import Success from './components/success/Success'
 import {
   createBrowserRouter,
   RouterProvider,
