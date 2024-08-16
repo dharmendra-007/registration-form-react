@@ -5,7 +5,11 @@ import email_icon from '../../assets/email.png';
 import password_icon from '../../assets/password.png';
 import { MdError } from "react-icons/md";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { Link } from 'react-router-dom'
+import { Link , useNavigate} from 'react-router-dom'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebase';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Registration() {
   const [name, setName] = useState("");
@@ -19,6 +23,8 @@ function Registration() {
   const [errname, setErrname] = useState(null);
   const [erremail, setErremail] = useState(null);
   const [errpass, setErrpass] = useState(null);
+
+  const navigate = useNavigate();
 
   const handleName = (event) => {
     const { value } = event.target;
@@ -61,10 +67,35 @@ function Registration() {
     }
   };
 
+  const handleRegister = async (event) => {
+    event.preventDefault();
+    if (isFormValid) {
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        toast.success("Registration successful!"); 
+      } catch (error) {
+        toast.error("Registration failed. Please try again.");
+      }
+    }
+  };
+
+  const handelSignIn = async (event) => {
+    event.preventDefault();
+    if (isFormValid) {
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        navigate('/success');
+      } catch (error) {
+        toast.error("Login failed. Please try again.");
+      }
+    }
+  }
+
   const isFormValid = isNameValid && isEmailValid && isPasswordValid;
 
   return (
     <div className="container">
+      <ToastContainer/>
       <div className="header">
         <div className="text">Registration Form</div>
         <div className="underline"></div>
@@ -110,9 +141,8 @@ function Registration() {
           * Password must contain 8 characters, a capital letter, a small letter, a digit, and a special character.
         </p>
         <div className="submit-container">
-          <Link to="/success">
-            <button type="submit" className="register-btn" disabled={!isFormValid}>Register</button>
-          </Link>
+        <button className="register-btn" disabled={!isFormValid} onClick={handleRegister}>Sign Up</button>
+        <button type="submit" className="register-btn" disabled={!isFormValid} onClick={handelSignIn}>Sign In</button>
         </div>
       </form>
     </div>

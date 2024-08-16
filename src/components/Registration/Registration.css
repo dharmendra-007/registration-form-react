@@ -70,6 +70,9 @@ p {
 }
 .submit-container{
   margin: 30px auto;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 .register-btn {
@@ -157,6 +160,7 @@ p {
     width: 280px;
     text-align: justify;
   }
+
 }
 
 @media (max-width: 468px) {
@@ -197,4 +201,3 @@ p {
     width: 200px;
   }
 }
-
