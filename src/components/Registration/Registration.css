@@ -32,6 +32,10 @@
   border-radius: 7px;
 }
 
+input::-ms-reveal,
+      input::-ms-clear {
+        display: none;
+      }
 .inputs{
   margin-top: 40px;
   display: flex;
@@ -54,6 +58,13 @@
   width: 20px;
 }
 
+.input button {
+  border: none;
+  font-size: 1.5rem;
+  background: transparent;
+  padding-inline: 3px;
+}
+
 .input input {
   height : 30px;
   width : 350px;
@@ -65,6 +76,15 @@
   padding-inline: 8px;
 }
 
+.input-password {
+  display: flex;
+  gap: 3px;
+  padding-right : 5px ;
+}
+
+.input-password input {
+  max-width : 320px;
+}
 p {
   padding-inline: 3px;
 }
@@ -138,6 +158,11 @@ p {
   .input input{
     width: 260px;
   }
+
+  .input-password input{
+    max-width: 230px;
+  }
+
   .password-disclaimer{
     width: 370px;
   }
@@ -152,6 +177,10 @@ p {
   }
   .input input{
     width: 200px;
+  }
+
+  .input-password input{
+    max-width: 170px;
   }
   .input img{
     margin: 0 15px;
@@ -174,6 +203,11 @@ p {
   .input input{
     width: 190px;
   }
+
+  .input-password input{
+    max-width: 160px;
+  }
+
   .input img {
     width: 15px;
     margin: 0 10px;
@@ -194,6 +228,11 @@ p {
     width: 140px;
     font-size: 12px;
   }
+
+  .input-password input{
+    max-width: 105px;
+  }
+
   .input img {
     width: 15px;
   }

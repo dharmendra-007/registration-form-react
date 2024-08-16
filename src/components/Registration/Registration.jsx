@@ -5,7 +5,9 @@ import email_icon from '../../assets/email.png';
 import password_icon from '../../assets/password.png';
 import { MdError } from "react-icons/md";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { Link , useNavigate} from 'react-router-dom'
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+import { useNavigate} from 'react-router-dom'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { ToastContainer, toast } from 'react-toastify';
@@ -23,6 +25,8 @@ function Registration() {
   const [errname, setErrname] = useState(null);
   const [erremail, setErremail] = useState(null);
   const [errpass, setErrpass] = useState(null);
+
+  const [visibility, setVisibility] = useState(false);
 
   const navigate = useNavigate();
 
@@ -125,16 +129,17 @@ function Registration() {
             />
             <p>{erremail}</p>
           </div>
-          <div className="input">
+          <div className="input input-password">
             <img src={password_icon} alt="password icon" />
             <input
-              type="password"
+              type={visibility ? "text" : "password"}
               placeholder="Enter Password"
               onChange={handlePassword}
               value={password}
               required
             />
-            <p>{errpass}</p>
+            <button type="button" onClick={() => setVisibility(!visibility)}>{visibility ? <FaEye/> : <FaEyeSlash/>}</button>
+            <span>{errpass}</span>
           </div>
         </div>
         <p className="password-disclaimer">
