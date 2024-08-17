@@ -140,6 +140,9 @@ p {
   transform: none;
 }
 
+.input-password button {
+  cursor: pointer;
+}
 .password-disclaimer {
   color: #555;
   font-size: 12px;
