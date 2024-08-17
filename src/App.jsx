@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import Registration from './components/Registration/Registration'
 import Success from './components/success/Success'
+import Login from './components/Login/Login'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -12,6 +13,10 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Login/>,
+  },
+  {
+    path: "register",
     element: <Registration/>,
   },
   {

@@ -1,6 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   margin: auto;
   width: 600px;
   height: 440px;
@@ -40,7 +41,8 @@ input::-ms-clear {
   margin-top: 40px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  justify-content: space-evenly;
+  /* gap: 24px; */
 }
 
 .input {
@@ -94,7 +96,6 @@ p {
   display: flex;
   justify-content: space-evenly;
   align-items: base;
-  gap: 20px;
 }
 
 .submit-container p {

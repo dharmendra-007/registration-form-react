@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import './Registration.css';
-import user_icon from '../../assets/person.png';
+import './Login.css'
 import email_icon from '../../assets/email.png';
 import password_icon from '../../assets/password.png';
 import { MdError } from "react-icons/md";
@@ -8,40 +7,24 @@ import { BsCheckCircleFill } from "react-icons/bs";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useNavigate} from 'react-router-dom'
-import { createUserWithEmailAndPassword} from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Registration() {
-  const [name, setName] = useState("");
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [isNameValid, setIsNameValid] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
 
-  const [errname, setErrname] = useState(null);
   const [erremail, setErremail] = useState(null);
 
   const [visibility, setVisibility] = useState(false);
   const [showIcon, setShowIcon] = useState(<FaEyeSlash/>);
 
   const navigate = useNavigate();
-
-  const handleName = (event) => {
-    const { value } = event.target;
-    setName(value);
-
-    if (value.trim()) {
-      setIsNameValid(true);
-      setErrname(<BsCheckCircleFill />);
-    } else {
-      setIsNameValid(false);
-      setErrname(<MdError />);
-    }
-  };
 
   const handleEmail = (event) => {
     const { value } = event.target;
@@ -63,10 +46,8 @@ function Registration() {
 
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (passwordPattern.test(value)) {
-      // setErrpass(<BsCheckCircleFill />);
       setIsPasswordValid(true);
     } else {
-      // setErrpass(<MdError />);
       setIsPasswordValid(false);
     }
   };
@@ -76,45 +57,32 @@ function Registration() {
     visibility ? setShowIcon(<FaEyeSlash/>) : setShowIcon(<FaEye/>);
   }
 
-  const handleRegister = async (event) => {
+  const handelSignIn = async (event) => {
     event.preventDefault();
     if (isFormValid) {
       try {
-        await createUserWithEmailAndPassword(auth, email, password);
-        toast.success("Registration successful!"); 
-        navigate('/')
+        await signInWithEmailAndPassword(auth, email, password);
+        navigate('/success');
       } catch (error) {
-        toast.error("Registration failed. Please try again.");
+        toast.error("Login failed. Please try again.");
       }
     }
-  };
+  }
 
   const handelRegisterSignInToggle = () => {
-    navigate('/');
+    navigate('/register');
   }
-  const isFormValid = isNameValid && isEmailValid && isPasswordValid;
+  const isFormValid = isEmailValid && isPasswordValid;
 
   return (
     <div className="container">
       <ToastContainer/>
       <div className="header">
-        <div className="text">Register</div>
+        <div className="text">Log In</div>
         <div className="underline"></div>
       </div>
       <form action="">
         <div className="inputs">
-          <div className="input">
-            <img src={user_icon} alt="user icon" />
-            <input
-              type="text"
-              placeholder="Enter name"
-              onChange={handleName}
-              value={name}
-              spellCheck="False"
-              required
-            />
-            <p>{errname}</p>
-          </div>
           <div className="input">
             <img src={email_icon} alt="email icon" />
             <input
@@ -143,12 +111,12 @@ function Registration() {
           * Password must contain 8 characters, a capital letter, a small letter, a digit, and a special character.
         </p>
         <div className="submit-container">
-        <p onClick={handelRegisterSignInToggle}>Already have an account ? </p>
-        <button className="register-btn" disabled={!isFormValid} onClick={handleRegister}>Sign Up</button>
+        <p onClick={handelRegisterSignInToggle}>Don't have an account ? </p>
+        <button type="submit" className="register-btn" disabled={!isFormValid} onClick={handelSignIn}>Sign In</button>
         </div>
       </form>
     </div>
   );
 }
 
-export default Registration;
+export default Login;
