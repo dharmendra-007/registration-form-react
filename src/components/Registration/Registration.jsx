@@ -9,9 +9,10 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useNavigate} from 'react-router-dom'
 import { createUserWithEmailAndPassword} from 'firebase/auth';
-import { auth } from '../../firebase';
+import { auth , db} from '../../firebase';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { setDoc , doc } from 'firebase/firestore';
 
 function Registration() {
   const [name, setName] = useState("");
@@ -61,7 +62,7 @@ function Registration() {
     const { value } = event.target;
     setPassword(value);
 
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (passwordPattern.test(value)) {
       // setErrpass(<BsCheckCircleFill />);
       setIsPasswordValid(true);
@@ -71,7 +72,7 @@ function Registration() {
     }
   };
 
-  function handelShowHide() {
+  const handelShowHide = () => {
     setVisibility(!visibility)
     visibility ? setShowIcon(<FaEyeSlash/>) : setShowIcon(<FaEye/>);
   }
@@ -81,10 +82,19 @@ function Registration() {
     if (isFormValid) {
       try {
         await createUserWithEmailAndPassword(auth, email, password);
+        const user = auth.currentUser;
+        console.log(user)
+        if (user) {
+          await setDoc(doc(db, "Users", user.uid), {
+            email: user.email,
+            name: name,
+            password: password
+          });
+        }
         toast.success("Registration successful!"); 
         navigate('/')
       } catch (error) {
-        toast.error("Registration failed. Please try again.");
+        toast.error("Registration failed." + error.message);
       }
     }
   };

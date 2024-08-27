@@ -44,7 +44,7 @@ function Login() {
     const { value } = event.target;
     setPassword(value);
 
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (passwordPattern.test(value)) {
       setIsPasswordValid(true);
     } else {
@@ -52,7 +52,7 @@ function Login() {
     }
   };
 
-  function handelShowHide() {
+  const handelShowHide = () => {
     setVisibility(!visibility)
     visibility ? setShowIcon(<FaEyeSlash/>) : setShowIcon(<FaEye/>);
   }

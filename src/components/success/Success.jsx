@@ -1,8 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Success.css'
 import { Link } from 'react-router-dom'
+import { auth , db } from '../../firebase'
+import { getDoc ,doc } from 'firebase/firestore'
 
 function Success() {
+
+  const [userDetail , setUserDetail] = useState({name : "{User}"})
+
+  const fetchUserData = async () => {
+    auth.onAuthStateChanged(async (user) => {
+      console.log(user);
+      const docRef = doc(db , "Users" ,user.uid);
+      const docSnap = await getDoc(docRef);
+      if(docSnap.exists()) {
+        console.log(docSnap.data());
+        setUserDetail(docSnap.data());
+      }
+    })
+  }
+
+  useEffect(() => {
+  fetchUserData()} , [])
+
   return (
     <div id="card" className="animated fadeIn">
   <div id="upper-side">
@@ -40,7 +60,7 @@ function Success() {
   </div>
   <div id="lower-side">
     <p id="message">
-      Congratulations, your account has been successfully created.
+      Congratulations <span className='userName'>{userDetail.name || "{User}"}</span>, your account has been successfully created.
     </p>
     <Link to="/" id="contBtn">
       Return
